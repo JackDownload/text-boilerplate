@@ -1,46 +1,124 @@
 <template>
-
-  <div class="container">
-    <div class="card shadow">
-      <div class="card-body">
-        <h1>Hello world!</h1>
-        <p class="lead">A ready to go boilerplate with some modifications to bootstrap.</p>
-        <p>Made with ❤️ by <a href="https://derianandre.com/">DerianAndre</a></p>
-      </div>
-    </div>
-
-<b-col v-for="article of articles" :key="article.slug" class="col-sm-"6>
+  <div>
+    <div>
+      <b-navbar
+        type="dark"
+        class="customnav navbar-default sticky-top pt-1 pb-6"
+      >
+        <b-navbar-brand>
+          <nuxt-link to="/">
+            <img
+              id="josie"
+              src="~assets/images/josies-logo-white-v2.svg"
+              class="logo pt-2"
+              alt="Josie's recipes"
+            />
+          </nuxt-link>
+        </b-navbar-brand>
+        <b-nav-text class="title-home"><h1>Toutes mes recettes</h1></b-nav-text>
+        <NavItems />
+      </b-navbar>
+      <b-container fluid="lg" class="animate animate3 slideUp">
+        <b-row>
+          <b-col>
+            <p class="lead lead-home mt-4">
+              Bienvenue sur mon site ! Chaque semaine, je publie 3 recettes sur
+              une thématique et je conclue la semaine en beauté avec un dessert.
+              Venez me suivre sur
+              <a
+                href="https://www.instagram.com/josiesrecipes/"
+                target="_blank"
+              >
+                Instagram
+              </a>
+              pour les découvrir en avant première.
+            </p>
+            <AppSearchInputHome />
+          </b-col>
+        </b-row>
+        <b-row class="mb-4">
+          <CategoriesLinks />
+        </b-row>
+        <b-row>
+          <b-col>
+            <h2 class="subtitle-home mb-2">Mes dernières recettes publiées</h2>
+          </b-col>
+        </b-row>
+        <b-row
+          id="posts"
+          class="row-cols-1 row-cols-sm-1 row-cols-lg-1 row-cols-xl-2"
+        >
+          <b-col v-for="article of articles" :key="article.slug" class="mb-3">
+            <b-card class="post horizontal" no-body>
               <NuxtLink
                 :to="{ name: 'blog-slug', params: { slug: article.slug } }"
-              >  
-<div class="card-container">
-  <div class="card u-clearfix">
-    <div class="card-body">
-      <span class="card-number card-circle subtle">01</span>
-      <span class="card-author subtle">John Smith</span>
-      <h2 class="card-title">{{ article.title }} Brunch Recipe</h2>
-      <span class="card-description subtle">These last few weeks I have been working hard on a new brunch recipe for you all.</span>
-      <div class="card-read">Read</div>
-      <span class="card-tag card-circle subtle">C</span>
-    </div>
-    <img                         :src="article.thumbnail"
+              >
+                <b-row>
+                  <b-col md="5">
+                    <div class="img-container">
+                      <b-card-img-lazy
+                        :src="article.thumbnail"
                         left
                         blank-color="#d0b8ac"
                         loading="lazy"
-                        alt="" />
-  </div>
-  <div class="card-shadow"></div>
-</div>
+                        alt=""
+                      >
+                      </b-card-img-lazy>
+                    </div>
+                  </b-col>
+                  <b-col md="7">
+                    <b-card-body>
+                      <b-card-title title-tag="h3">
+                        {{ article.title }}
+                      </b-card-title>
+                      <p class="lead mb-3">{{ article.description }}</p>
+                      <div class="infos-card">
+                        <div v-if="article.veggie">
+                          <i class="fas fa-seedling"></i>
+                          Recette végétarienne
+                        </div>
+                        <div v-if="article.country">
+                          <i class="fas fa-globe-americas"></i>
+                          {{ article.country }}
+                        </div>
+                        <div v-if="article.difficulty">
+                          <i class="fas fa-check-double"></i>
+                          {{ article.difficulty }}
+                        </div>
+                        <div v-if="article.time">
+                          <i class="fas fa-stopwatch"></i>
+                          {{ article.time }} min
+                        </div>
+                      </div>
+                    </b-card-body>
+                  </b-col>
+                </b-row>
               </NuxtLink>
-  </b-col>
-</div>
-
+            </b-card>
+          </b-col>
+        </b-row>
+        <b-row class="mb-2">
+          <CategoryPush />
+        </b-row>
+        <b-row>
+          <b-col>
+            <div class="flex items-center">
+              <nuxt-link
+                to="/2"
+                class="flex-1 py-2 px-4 rounded mb-5 text-center see-more"
+              >
+                Voir plus de recettes
+              </nuxt-link>
+            </div>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
+  </div>
 </template>
 
 <script>
-
 export default {
-  components: { },
   async asyncData({ $content, params }) {
     const articles = await $content('articles', params.slug)
       .only([
@@ -63,7 +141,7 @@ export default {
       ])
       .sortBy('id', 'desc')
       .where({ published: 1 })
-      .limit(30)
+      .limit(10)
       .fetch()
     return {
       articles
@@ -94,10 +172,17 @@ export default {
     }
   }
 }
-
-  
 </script>
 
-<style lang="scss" scoped>
- 
+<style class="postcss">
+.article-card {
+  border-radius: 8px;
+}
+.article-card a {
+  background-color: #fff;
+  border-radius: 8px;
+}
+.article-card img div {
+  border-radius: 8px 0 0 8px;
+}
 </style>
