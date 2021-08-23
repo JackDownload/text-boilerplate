@@ -14,6 +14,15 @@ export default {
     host: '0.0.0.0'
   },
 
+  generate: {     
+    async routes () {
+      const { $content } = require('@nuxt/content')
+      const files = await $content('blog').only('slug').fetch();
+      return files.map(file => `/${file.slug}`);
+    }
+  },
+
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'Bootstrap',
@@ -36,10 +45,6 @@ script: [
 css: [
 '@/assets/scss/style.scss',
 ],
-
-generate: {
-  '/blog/_slug'
-},
 
 // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 plugins: [
