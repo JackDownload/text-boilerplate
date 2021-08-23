@@ -37,6 +37,11 @@ css: [
 '@/assets/scss/style.scss',
 ],
 
+generate            : {
+  fallback : true,
+  routes: dynamicRoutes
+},
+
 // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
 plugins: [
 { src: '~/plugins/bootstrap.client.js' }
