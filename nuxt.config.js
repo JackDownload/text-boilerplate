@@ -17,7 +17,7 @@ export default {
   generate: {     
     async routes () {
       const { $content } = require('@nuxt/content')
-      const files = await $content('blog').only('slug').fetch();
+      const files = await $content('articles').only('slug').fetch();
       return files.map(file => `/${file.slug}`);
     }
   },
