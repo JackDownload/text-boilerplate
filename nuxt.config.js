@@ -37,9 +37,7 @@ css: [
 '@/assets/scss/style.scss',
 ],
 
-generate            : {
-  fallback : true,
-  routes: dynamicRoutes,
+generate: {
   '/blog/_slug'
 },
 
