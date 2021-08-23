@@ -1,46 +1,21 @@
-<template lang="html">
-  <div class="main">
-    <div class="main-header">
-      <h1>{{siteInfo.sitename}}</h1>
-      <p>{{siteInfo.sitedescription}}</p>
-    </div>
-    <div class="posts-list">
-      <h2 class="posts-list-title">Posts</h2>
-      <p class="post-link" v-for="post in blogPosts"><n-link :to="post._path">{{post.title}}</n-link></p>
+<template>
+  <div class="container">
+    <div class="card shadow">
+      <div class="card-body">
+        <h1>Hello world!</h1>
+        <p class="lead">A ready to go boilerplate with some modifications to bootstrap.</p>
+        <p>Made with ❤️ by <a href="https://derianandre.com/">DerianAndre</a></p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  computed: {
-    blogPosts() {
-      return this.$store.state.blogPosts;
-    },
-    siteInfo() {
-      return this.$store.state.siteInfo;
-    }
+  export default {
+    
   }
-}
 </script>
 
-<style lang="css" scoped>
-.posts-list {
-  width: 100%;
-  background-color: whitesmoke;
-  padding: 20px;
-  margin-top: 35px;
-}
-.post-link {
-  padding-top: 10px;
-}
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-.main-header {
-  text-align: center;
-}
+<style>
+
 </style>
