@@ -79,4 +79,24 @@ routes: async () => {
   const articles = await $content('articles').only(['path']).fetch()
   return articles.map((p) => p.path)
 }
+
+},
+
+// Build Configuration: https://go.nuxtjs.dev/config-build
+build: {
+  loaders: {
+    vue: {
+      compilerOptions: {
+        whitespace: 'condense',
+        preserveWhitespace: false
+      }
+    },
+    sass: {
+      implementation: require('sass')
+    },
+    scss: {
+      implementation: require('sass')
+    }
+  }
+}
 }
