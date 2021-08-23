@@ -79,4 +79,4 @@ routes: async () => {
   const articles = await $content('articles').only(['path']).fetch()
   return articles.map((p) => p.path)
 }
-},
+}
