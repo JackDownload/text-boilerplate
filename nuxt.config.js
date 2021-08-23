@@ -1,5 +1,4 @@
 import pkg from './package'
-import info from './content/setup/info'
 import path from 'path'
 import glob from 'glob'
 
