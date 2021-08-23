@@ -14,11 +14,12 @@ export default {
     host: '0.0.0.0'
   },
 
-  generate: {     
+  generate: {    
+    fallback: true, 
     async routes () {
       const { $content } = require('@nuxt/content')
       const files = await $content('articles').only('slug').fetch();
-      return files.map(file => `/${file.slug}`);
+      return files.map(file => `/blog/${file.slug}`);
     }
   },
 
