@@ -49,9 +49,10 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/markdownit',
-    '@nuxtjs/axios', // Doc: https://axios.nuxtjs.org/usage
+    // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    // https://go.nuxtjs.dev/content
+    '@nuxt/content',
   ],
   markdownit: {
     injected: true,
